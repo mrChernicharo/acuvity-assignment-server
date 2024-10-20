@@ -18,14 +18,15 @@ app.get("/node/:id", (req, res) => {
       res.json({ error: "NOT FOUND", payload: null });
     }
   } catch (err) {
+    console.error(err);
     res.json({ error: "SERVER ERROR", payload: null });
   }
 });
 
 app.listen(PORT, async () => {
   console.log(`creating data files`);
-  const nodeCount = 10;
-  const edgeCount = 40;
+  const nodeCount = 12;
+  const edgeCount = 20;
   await initializeDataFiles(nodeCount, edgeCount);
   console.log(`data files created`);
   console.log(`listening on port ${PORT}`);
