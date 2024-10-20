@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
+import { initializeDataFiles } from "./faker.js";
 import { db } from "./DB.js";
+
 const PORT = 3333;
 const app = express();
 app.use(express.json());
@@ -20,6 +22,11 @@ app.get("/node/:id", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  console.log(`creating data files`);
+  const nodeCount = 10;
+  const edgeCount = 40;
+  await initializeDataFiles(nodeCount, edgeCount);
+  console.log(`data files created`);
   console.log(`listening on port ${PORT}`);
 });

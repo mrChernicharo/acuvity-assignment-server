@@ -1,10 +1,10 @@
-{"id": 1, "name": "A", "category": 0}
-{"id": 2, "name": "B", "category": 1}
-{"id": 3, "name": "C", "category": 1}
-{"id": 4, "name": "D", "category": 2}
-{"id": 5, "name": "E", "category": 2}
-{"id": 6, "name": "F", "category": 3}
-{"id": 7, "name": "G", "category": 3}
-{"id": 8, "name": "H", "category": 3}
-{"id": 9, "name": "I", "category": 4}
-{"id": 10, "name": "J", "category": 4}
+{"id":1,"name":"Yesenia","category":5,"userId":"c3605764-ac09-40bd-a9e6-e574fa89b41f","email":"Favian_Kilback93@hotmail.com","avatar":"https://avatars.githubusercontent.com/u/43479677","password":"xstbmCIKxfY30qI","birthdate":"2001-10-08T16:30:24.198Z","company":"Leffler - Cummings","balance":"$17877.77","registeredAt":"2024-08-02T22:45:57.465Z","favoritteFood":"Anise-rubbed Rabbit Salad"}
+{"id":2,"name":"Alexandro","category":9,"userId":"28ad42ab-77ac-46c5-b75b-6afa4b50c48d","email":"Eric.Predovic@yahoo.com","avatar":"https://avatars.githubusercontent.com/u/42314122","password":"nE97OWfTFpskO3s","birthdate":"1949-11-06T03:30:16.286Z","company":"Lueilwitz - Ondricka","balance":"$23597.42","registeredAt":"2024-03-18T04:37:58.650Z","favoritteFood":"Papaw Pie"}
+{"id":3,"name":"Sabrina","category":3,"userId":"01d3148e-06b8-466c-a13e-d4ca5aac35b9","email":"Mable83@hotmail.com","avatar":"https://avatars.githubusercontent.com/u/2062495","password":"qKb6b_1dUC36vxY","birthdate":"1961-04-13T07:16:05.115Z","company":"Carroll Inc","balance":"$40743.42","registeredAt":"2024-08-01T08:52:24.503Z","favoritteFood":"Pork Sausage Roll"}
+{"id":4,"name":"Calista","category":5,"userId":"aba77fff-f5a3-46c3-87c0-de6f94fdee3b","email":"Paula0@hotmail.com","avatar":"https://avatars.githubusercontent.com/u/8392053","password":"R6Ec3R2AuIXh8qt","birthdate":"1955-10-05T07:02:28.276Z","company":"MacGyver, Volkman and Durgan","balance":"$55154.87","registeredAt":"2023-11-19T15:56:21.464Z","favoritteFood":"Kebab"}
+{"id":5,"name":"Mariela","category":5,"userId":"74794f67-70dc-4539-aaf4-1852b3b17972","email":"Ray60@yahoo.com","avatar":"https://avatars.githubusercontent.com/u/87425773","password":"byyM_w4HsfD0Tpi","birthdate":"1951-12-05T10:46:47.453Z","company":"Sauer - Mills","balance":"$66309.97","registeredAt":"2024-01-29T02:30:21.797Z","favoritteFood":"Banana-glazed Rabbit Skewers"}
+{"id":6,"name":"Kayli","category":6,"userId":"61f6bb6f-e50f-4a40-8bcc-36564ddb19a1","email":"Lisa_Moen94@gmail.com","avatar":"https://avatars.githubusercontent.com/u/1803084","password":"4hkzq7QXe48u3tn","birthdate":"2003-03-22T14:18:38.375Z","company":"Miller - Morissette","balance":"$28762.00","registeredAt":"2024-08-04T16:22:25.709Z","favoritteFood":"Barbecue Ribs"}
+{"id":7,"name":"Shawna","category":3,"userId":"45a07666-e5a0-4670-bc02-ea6d26c7d752","email":"Ruthe72@yahoo.com","avatar":"https://avatars.githubusercontent.com/u/80994631","password":"lViOLxF_tEhPvm_","birthdate":"2000-11-28T18:55:28.475Z","company":"Okuneva - Huels","balance":"$36731.20","registeredAt":"2024-07-22T16:37:21.716Z","favoritteFood":"Quail Steak"}
+{"id":8,"name":"Darren","category":3,"userId":"b43229b1-aed5-405d-954e-2cc72f083c00","email":"Johanna.Cole@hotmail.com","avatar":"https://avatars.githubusercontent.com/u/63847781","password":"WqQHC6yY3RWc5ru","birthdate":"1948-07-04T03:26:51.260Z","company":"Heathcote - Friesen","balance":"$94149.53","registeredAt":"2024-09-16T06:34:18.025Z","favoritteFood":"Pork With Lychee Sauce"}
+{"id":9,"name":"Jordy","category":5,"userId":"0089be10-54a5-4187-a4be-00c34235f9d7","email":"Osborne_Reilly95@gmail.com","avatar":"https://avatars.githubusercontent.com/u/69095661","password":"uxH6WSbL0E2jGHM","birthdate":"1982-08-29T06:22:54.495Z","company":"Cummings, Adams and Schmeler","balance":"$4193.88","registeredAt":"2024-07-25T01:32:34.645Z","favoritteFood":"Salmon Nigiri"}
+{"id":10,"name":"Natalie","category":0,"userId":"bca8bc27-3597-4c89-8c6d-2b42ff1a6550","email":"Judge_Becker@hotmail.com","avatar":"https://avatars.githubusercontent.com/u/59378208","password":"R51KFvWApHaFRvF","birthdate":"2003-05-10T04:38:24.026Z","company":"Jones, Roob and Kunde","balance":"$63678.99","registeredAt":"2024-07-31T06:47:38.753Z","favoritteFood":"Kebab"}
