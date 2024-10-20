@@ -1,4 +1,4 @@
-{"id": 1, "name": "A", "category": 1}
+{"id": 1, "name": "A", "category": 0}
 {"id": 2, "name": "B", "category": 1}
 {"id": 3, "name": "C", "category": 1}
 {"id": 4, "name": "D", "category": 2}
@@ -6,3 +6,5 @@
 {"id": 6, "name": "F", "category": 3}
 {"id": 7, "name": "G", "category": 3}
 {"id": 8, "name": "H", "category": 3}
+{"id": 9, "name": "I", "category": 4}
+{"id": 10, "name": "J", "category": 4}

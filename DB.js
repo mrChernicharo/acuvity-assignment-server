@@ -1,6 +1,6 @@
 import * as jsonl from "node-jsonl";
 
-export class DB {
+class DB {
   nodes;
   edges;
   ready = false;
