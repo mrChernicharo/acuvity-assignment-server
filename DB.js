@@ -33,7 +33,16 @@ export class DB {
 
     const node = this.nodes.find((n) => n.id === id) ?? null;
     const links = this.edges.filter((e) => [e.source, e.destination].includes(id));
-    return { node, links };
+
+    const relatedNodeIds = new Set();
+    links.forEach((link) => {
+      relatedNodeIds.add(link.source);
+      relatedNodeIds.add(link.destination);
+    });
+
+    const relatedNodes = this.nodes.filter((n) => n.id !== node.id && relatedNodeIds.has(n.id));
+
+    return { node, relatedNodes, links };
   }
 }
 

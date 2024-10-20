@@ -1,20 +1,22 @@
 import express from "express";
+import cors from "cors";
 import { db } from "./DB.js";
 const PORT = 3333;
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/node/:id", (req, res) => {
   try {
     const { id } = req.params;
     const node = db.getNodeWithLinks(Number(id));
     if (node) {
-      res.json({ error: null, data: node });
+      res.json({ error: null, payload: node });
     } else {
-      res.json({ error: "NOT FOUND", data: null });
+      res.json({ error: "NOT FOUND", payload: null });
     }
   } catch (err) {
-    res.json({ error: "SERVER ERROR", data: null });
+    res.json({ error: "SERVER ERROR", payload: null });
   }
 });
 
