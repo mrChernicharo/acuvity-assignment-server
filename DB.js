@@ -25,7 +25,7 @@ export class DB {
     return entries;
   }
 
-  getNode(id) {
+  getNodeWithLinks(id) {
     if (!this.ready) {
       console.log("not ready yet!");
       return null;

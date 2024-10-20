@@ -7,7 +7,7 @@ app.use(express.json());
 app.get("/node/:id", (req, res) => {
   try {
     const { id } = req.params;
-    const node = db.getNode(+id);
+    const node = db.getNodeWithLinks(Number(id));
     if (node) {
       res.json({ error: null, data: node });
     } else {
