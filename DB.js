@@ -1,21 +1,25 @@
+import fs from "node:fs/promises";
 import * as jsonl from "node-jsonl";
+import { createRandomEdges, createRandomNodes, stringifyData } from "./utils.js";
+
+const NODE_COUNT = 2000;
+const EDGE_COUNT = 5040;
 
 class DB {
   nodes = new Map();
   edges = new Map();
   ready = false;
+
   constructor() {
-    Promise.all([this.loadJsonLData("./data/nodes.jsonl"), this.loadJsonLData("./data/edges.jsonl")]).then(
-      ([nodes, edges]) => {
-        for (const node of nodes) {
-          this.nodes.set(node.id, node);
+    this.initializeDataFiles(NODE_COUNT, EDGE_COUNT).then(() => {
+      Promise.all([this.loadJsonLData("./data/nodes.jsonl"), this.loadJsonLData("./data/edges.jsonl")]).then(
+        ([nodes, edges]) => {
+          for (const node of nodes) this.nodes.set(node.id, node);
+          for (const edge of edges) this.edges.set(edge.id, edge);
+          this.ready = true;
         }
-        for (const edge of edges) {
-          this.edges.set(edge.id, edge);
-        }
-        this.ready = true;
-      }
-    );
+      );
+    });
   }
 
   async loadJsonLData(filePath) {
@@ -29,14 +33,36 @@ class DB {
     return entries;
   }
 
+  async writeToJsonLFile(data, filename) {
+    try {
+      const jsonString = stringifyData(data);
+
+      await fs.mkdir("data", { recursive: true });
+
+      await fs.writeFile(`data/${filename}`, jsonString);
+
+      console.log(`JSON data saved to ${filename}`);
+    } catch (err) {
+      console.error("Error writing to file:", err);
+    }
+  }
+
+  async initializeDataFiles(nodeCount, edgeCount) {
+    console.log(`creating data files`);
+    const nodes = await createRandomNodes(nodeCount);
+    const edges = await createRandomEdges(nodes, edgeCount);
+    await Promise.all([this.writeToJsonLFile(nodes, "nodes.jsonl"), this.writeToJsonLFile(edges, "edges.jsonl")]);
+    console.log(`data files created`);
+  }
+
   getNeighbors(node) {
     const links = [...this.edges.values()].filter((e) => [e.source, e.destination].includes(node.id));
+
     const neighbors = links.map((link) => {
       const neighborId = link.source === node.id ? link.destination : link.source;
       return this.nodes.get(neighborId);
     });
 
-    // console.log(":::getNeighbors", links, neighbors);
     return neighbors;
   }
 
@@ -61,7 +87,6 @@ class DB {
         distantNeighborIDs.add(nn.id);
       });
     });
-
     const distantNeighbors = [...distantNeighborIDs.values()].map((id) => this.nodes.get(id));
 
     const links = [...this.edges.values()].filter(

@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import { initializeDataFiles } from "./faker.js";
 import { db } from "./DB.js";
 
 const PORT = 3333;
@@ -11,9 +10,9 @@ app.use(cors());
 app.get("/node/:id", (req, res) => {
   try {
     const { id } = req.params;
-    const node = db.getNodeWithLinks(Number(id));
-    if (node) {
-      res.json({ error: null, payload: node });
+    const payload = db.getNodeWithLinks(Number(id));
+    if (payload) {
+      res.json({ error: null, payload });
     } else {
       res.json({ error: "NOT FOUND", payload: null });
     }
@@ -24,10 +23,5 @@ app.get("/node/:id", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`creating data files`);
-  const nodeCount = 30;
-  const edgeCount = 40;
-  await initializeDataFiles(nodeCount, edgeCount);
-  console.log(`data files created`);
   console.log(`listening on port ${PORT}`);
 });
