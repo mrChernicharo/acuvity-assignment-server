@@ -23,5 +23,5 @@ app.get("/node/:id", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`listening on port ${PORT}`);
+  console.log(`server listening on port ${PORT}`);
 });

@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { faker } from "@faker-js/faker";
 
-faker.seed(910_382);
+faker.seed(894_712);
 
 export function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);

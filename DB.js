@@ -2,8 +2,8 @@ import fs from "node:fs/promises";
 import * as jsonl from "node-jsonl";
 import { createRandomEdges, createRandomNodes, stringifyData } from "./utils.js";
 
-const NODE_COUNT = 2000;
-const EDGE_COUNT = 5040;
+const NODE_COUNT = 50_000;
+const EDGE_COUNT = 100_000;
 
 class DB {
   nodes = new Map();
@@ -48,11 +48,11 @@ class DB {
   }
 
   async initializeDataFiles(nodeCount, edgeCount) {
-    console.log(`creating data files`);
+    console.log(`creating data files...`);
     const nodes = await createRandomNodes(nodeCount);
     const edges = await createRandomEdges(nodes, edgeCount);
     await Promise.all([this.writeToJsonLFile(nodes, "nodes.jsonl"), this.writeToJsonLFile(edges, "edges.jsonl")]);
-    console.log(`data files created`);
+    console.log(`...data files created successfully!`);
   }
 
   getNeighbors(node) {
@@ -95,7 +95,14 @@ class DB {
 
     const relatedNodes = Array.from(new Set([...closeNeighbors, ...distantNeighbors]));
 
-    return { node, links, relatedNodes };
+    return { node, links, relatedNodes, nodeCount: this.getNodeCount(), edgeCount: this.getEdgeCount() };
+  }
+
+  getNodeCount() {
+    return this.nodes.size;
+  }
+  getEdgeCount() {
+    return this.edges.size;
   }
 }
 
