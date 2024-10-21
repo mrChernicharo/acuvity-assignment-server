@@ -15,15 +15,12 @@ function createRandomNodes(nodeCount) {
       id: i,
       name: faker.person.firstName(),
       category: faker.number.int({ min: 0, max: 9 }),
-      userId: faker.string.uuid(),
-      email: faker.internet.email(),
       avatar: faker.image.avatar(),
-      password: faker.internet.password(),
-      birthdate: faker.date.birthdate(),
+      birthDate: faker.date.birthdate(),
       company: faker.company.name(),
-      balance: faker.finance.amount({ symbol: "$", min: 200, max: 100_000 }),
+      balance: faker.finance.amount({ symbol: "$ ", min: 200, max: 100_000, autoFormat: true }),
       registeredAt: faker.date.past(),
-      favoritteFood: faker.food.dish(),
+      favoriteFood: faker.food.dish(),
     };
   }
 

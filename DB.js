@@ -14,8 +14,6 @@ class DB {
           this.edges.set(edge.id, edge);
         }
         this.ready = true;
-
-        // console.log(":::", { nodes: this.nodes, edges: this.edges });
       }
     );
   }
@@ -31,67 +29,48 @@ class DB {
     return entries;
   }
 
+  getNeighbors(node) {
+    const links = [...this.edges.values()].filter((e) => [e.source, e.destination].includes(node.id));
+    const neighbors = links.map((link) => {
+      const neighborId = link.source === node.id ? link.destination : link.source;
+      return this.nodes.get(neighborId);
+    });
+
+    // console.log(":::getNeighbors", links, neighbors);
+    return neighbors;
+  }
+
   getNodeWithLinks(nodeId) {
     if (!this.ready) {
       console.error("DB not ready yet!");
       return null;
     }
 
-    // const node = this.nodes.find((n) => n.id === nodeId) ?? null;
-    // const links = this.edges.filter((e) => [e.source, e.destination].includes(nodeId));
+    const node = this.nodes.get(nodeId) ?? null;
 
-    // const relatedNodeIds = new Set();
-    // links.forEach((link) => {
-    //   relatedNodeIds.add(link.source);
-    //   relatedNodeIds.add(link.destination);
-    // });
+    const closeNeighborIDs = new Set();
+    this.getNeighbors(node).forEach((n) => {
+      closeNeighborIDs.add(n.id);
+    });
+    const closeNeighbors = [...closeNeighborIDs].map((id) => ({ ...this.nodes.get(id), directNeighbor: true }));
 
-    // const relatedNodes = this.nodes.filter((n) => n.id !== node.id && relatedNodeIds.has(n.id));
-
-    // return { node, relatedNodes, links };
-
-    const node = this.nodes.get(nodeId);
-    // const node = this.nodes.find((n) => n.id === nodeId);
-    const nodeIdSet = new Set();
-    const edgeIdSet = new Set();
-    console.log(":::getNodeWithLinks", { nodeId, name: node.name });
-
-    const computeNode = (id, depth) => {
-      if (depth <= 0) return;
-
-      const node = this.nodes.get(id);
-
-      if (!node) return null;
-
-      const nodeLinks = [...this.edges.values()].filter((e) => [e.source, e.destination].includes(id));
-      console.log("computeNode:::", { id, depth, nodeLinks });
-
-      const relatedNodeIds = new Set();
-      nodeLinks.forEach((link) => {
-        edgeIdSet.add(link.id);
-        relatedNodeIds.add(link.source);
-        relatedNodeIds.add(link.destination);
+    const distantNeighborIDs = new Set();
+    closeNeighbors.forEach((n) => {
+      this.getNeighbors(n).forEach((nn) => {
+        if (nn.id === node.id || closeNeighborIDs.has(nn.id)) return;
+        distantNeighborIDs.add(nn.id);
       });
+    });
 
-      //   const relatedNodes = [...this.nodes.values()].filter((n) => n.id !== node.id && relatedNodeIds.has(n.id));
-      const relatedNodes = [...this.nodes.values()];
-      console.log("computeNode:::", id, depth, relatedNodes);
+    const distantNeighbors = [...distantNeighborIDs.values()].map((id) => this.nodes.get(id));
 
-      for (const n of relatedNodes) {
-        nodeIdSet.add(n.id);
-        computeNode(n.id, depth - 1);
-      }
-    };
-    computeNode(node.id, 3);
+    const links = [...this.edges.values()].filter(
+      (ed) => closeNeighborIDs.has(ed.source) || closeNeighborIDs.has(ed.destination)
+    );
 
-    const links = Array.from(edgeIdSet).map((id) => this.edges.get(id));
-    const relatedNodes = Array.from(nodeIdSet)
-      .map((id) => this.nodes.get(id))
-      .filter((n) => n.id !== nodeId);
+    const relatedNodes = Array.from(new Set([...closeNeighbors, ...distantNeighbors]));
 
-    const res = { node, relatedNodes, links, edgeIdSet, nodeIdSet, arr: Array.from(edgeIdSet) };
-    console.log("::: getNodeWithLinks", { res });
-    return { node, relatedNodes, links };
+    return { node, links, relatedNodes };
   }
 }
 

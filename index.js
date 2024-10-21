@@ -25,8 +25,8 @@ app.get("/node/:id", (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`creating data files`);
-  const nodeCount = 12;
-  const edgeCount = 20;
+  const nodeCount = 30;
+  const edgeCount = 40;
   await initializeDataFiles(nodeCount, edgeCount);
   console.log(`data files created`);
   console.log(`listening on port ${PORT}`);
