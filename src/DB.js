@@ -74,6 +74,8 @@ class DB {
 
     const node = this.nodes.get(nodeId) ?? null;
 
+    if (!node) return null;
+
     const closeNeighborIDs = new Set();
     this.getNeighbors(node).forEach((n) => {
       closeNeighborIDs.add(n.id);
