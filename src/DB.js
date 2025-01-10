@@ -12,7 +12,7 @@ class DB {
 
   constructor() {
     this.initializeDataFiles(NODE_COUNT, EDGE_COUNT).then(() => {
-      Promise.all([this.loadJsonLData("./data/nodes.jsonl"), this.loadJsonLData("./data/edges.jsonl")]).then(
+      Promise.all([this.loadJsonLData("./app-data/nodes.jsonl"), this.loadJsonLData("./app-data/edges.jsonl")]).then(
         ([nodes, edges]) => {
           for (const node of nodes) this.nodes.set(node.id, node);
           for (const edge of edges) this.edges.set(edge.id, edge);
@@ -37,9 +37,9 @@ class DB {
     try {
       const jsonString = stringifyData(data);
 
-      await fs.mkdir("data", { recursive: true });
+      await fs.mkdir("app-data", { recursive: true });
 
-      await fs.writeFile(`data/${filename}`, jsonString);
+      await fs.writeFile(`app-data/${filename}`, jsonString);
 
       console.log(`JSON data saved to ${filename}`);
     } catch (err) {
